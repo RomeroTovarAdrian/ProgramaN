@@ -89,13 +89,13 @@
     </div>
     <script>
         function verificarCredenciales() {
+            const usuarioCorrecto = "Admin";
+            const contrasenaCorrecta = "Admin";
+            
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-            const usuarioEncontrado = usuarios.find(user => user.usuario === username && user.contrasena === password);
-
-            if (usuarioEncontrado) {
+            if (username === usuarioCorrecto && password === contrasenaCorrecta) {
                 window.location.href = 'header.html'; // Redirige a la página principal
                 return false; // Previene el envío del formulario
             } else {
