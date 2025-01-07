@@ -76,29 +76,9 @@
             width: 22%; /* Ajusta el ancho de los botones para que entren en una línea */
         }
     </style>
-</head>
-<body>
-    <div class="gif-overlay"></div>
-    <div class="container">
-        <h1>Responde la Pregunta</h1>
-        <div id="video-container">
-            <video id="video" controls>
-                <source src="Perezoso9.mp4" type="video/mp4">
-                Tu navegador no soporta la reproducción de video.
-            </video>
-            <button onclick="activarVideo()">Iniciar Video</button> <!-- Botón para iniciar el video -->
-        </div>
-        <div class="buttons-container" id="options">
-            <button onclick="seleccionarOpcion('A')">A</button>
-            <button onclick="seleccionarOpcion('B')">B</button>
-            <button onclick="seleccionarOpcion('C')">C</button>
-            <button onclick="seleccionarOpcion('D')">D</button>
-        </div>
-        <div id="resultado"></div>
-    </div>
-
     <script>
         const respuestaCorrecta = 'C'; // Puedes cambiar esta variable a la opción correcta
+        let contadorRespuestas = 0; // Contador de respuestas correctas
 
         function activarVideo() {
             const video = document.getElementById('video');
@@ -115,9 +95,14 @@
             const resultadoDiv = document.getElementById('resultado');
             if (opcion === respuestaCorrecta) {
                 resultadoDiv.textContent = "¡Correcto! Has seleccionado la opción " + opcion;
+                contadorRespuestas++; // Incrementar contador de respuestas correctas
                 setTimeout(() => {
-                    window.location.href = 'final.html'; // Redirigir a la siguiente página
-                }, 2000); // Esperar 2 segundos antes de redirigir
+                    if (contadorRespuestas === 9) {
+                        window.location.href = 'final.html'; // Redirigir a la página final si contador es 9
+                    } else {
+                        alert("Aun te faltan preguntas por responder, porfavor regresa al menú."); // Mensaje para continuar
+                    }
+                }, 2000); // Esperar 2 segundos antes de la acción
             } else {
                 resultadoDiv.textContent = "Opción incorrecta. Por favor, intenta de nuevo.";
                 iniciarReconocimientoVoz(); // Reiniciar el reconocimiento de voz
@@ -163,5 +148,25 @@
             };
         }
     </script>
+</head>
+<body>
+    <div class="gif-overlay"></div>
+    <div class="container">
+        <h1>Responde la Pregunta</h1>
+        <div id="video-container">
+            <video id="video" controls>
+                <source src="Perezoso9.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <button onclick="activarVideo()">Iniciar Video</button> <!-- Botón para iniciar el video -->
+        </div>
+        <div class="buttons-container" id="options">
+            <button onclick="seleccionarOpcion('A')">A</button>
+            <button onclick="seleccionarOpcion('B')">B</button>
+            <button onclick="seleccionarOpcion('C')">C</button>
+            <button onclick="seleccionarOpcion('D')">D</button>
+        </div>
+        <div id="resultado"></div>
+    </div>
 </body>
 </html>
