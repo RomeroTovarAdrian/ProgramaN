@@ -86,7 +86,7 @@
             <input type="email" id="email" name="email" required maxlength="50">
             <div class="buttons">
                 <button type="submit">Registrar</button>
-                <button type="button" onclick="window.location.href='pagina-principal.html'">Regresar a la Página Principal</button>
+                <button type="button" onclick="window.location.href='PaginaLogin.html'">Regresar a la Página Principal</button>
             </div>
         </form>
     </div>
@@ -107,6 +107,7 @@
             // Por ejemplo, enviar los datos a un servidor o almacenarlos en localStorage
 
             alert("¡Registro exitoso!");
+            window.location.href = 'header.html'; // Redirige a la página principal
             return true; // Permite el envío del formulario
         }
     </script>

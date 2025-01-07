@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta con Video y Reconocimiento de Voz</title>
+    <style>
+        body {
+            background-color: #CCFF99; /* Color de fondo brillante */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente infantil */
+            margin: 0;
+            padding: 0;
+        }
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('gifFondo.gif') center center fixed;
+            background-size: cover;
+            z-index: 0;
+            opacity: 0.5; /* Ajusta este valor para cambiar la transparencia */
+        }
+        .container {
+            position: relative;
+            max-width: 750px; /* Aumentamos el ancho máximo del contenedor */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo claro con transparencia */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1;
+        }
+        h1 {
+            color: #FF8000; /* Color de texto */
+            font-size: 2.5em; /* Tamaño grande de texto */
+        }
+        label, #resultado {
+            color: #FF8000; /* Color de texto */
+            font-size: 1.5em; /* Tamaño grande de texto */
+            display: block;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #33FF33; /* Color de borde */
+            border-radius: 5px;
+            font-size: 1.2em; /* Tamaño de texto grande */
+            cursor: pointer;
+        }
+        button {
+            background-color: #33FF33; /* Color de botón */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5em; /* Tamaño de texto grande */
+        }
+        button:hover {
+            background-color: #0288D1; /* Color de botón al pasar el cursor */
+        }
+        #video {
+            width: 100%; /* Hacemos el video del ancho total del contenedor */
+            height: auto;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-around; /* Coloca los botones uno al lado del otro */
+            margin-top: 20px;
+        }
+        .buttons-container button {
+            width: 22%; /* Ajusta el ancho de los botones para que entren en una línea */
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-overlay"></div>
+    <div class="container">
+        <h1>Responde la Pregunta</h1>
+        <div id="video-container">
+            <video id="video" controls>
+                <source src="Gato1.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <button onclick="activarVideo()">Iniciar Video</button> <!-- Botón para iniciar el video -->
+        </div>
+        <div class="buttons-container" id="options">
+            <button onclick="seleccionarOpcion('A')">A</button>
+            <button onclick="seleccionarOpcion('B')">B</button>
+            <button onclick="seleccionarOpcion('C')">C</button>
+            <button onclick="seleccionarOpcion('D')">D</button>
+        </div>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        const respuestaCorrecta = 'A'; // Puedes cambiar esta variable a la opción correcta
+
+        function activarVideo() {
+            const video = document.getElementById('video');
+            video.muted = false; // Desactivar el silencio del video
+            video.play(); // Reproducir el video
+            document.getElementById('video-container').removeChild(document.querySelector('#video-container button')); // Quitar el botón después de iniciar el video
+        }
+
+        document.getElementById('video').addEventListener('ended', function() {
+            iniciarReconocimientoVoz();
+        });
+
+        function seleccionarOpcion(opcion) {
+            const resultadoDiv = document.getElementById('resultado');
+            if (opcion === respuestaCorrecta) {
+                resultadoDiv.textContent = "¡Correcto! Has seleccionado la opción " + opcion;
+                setTimeout(() => {
+                    window.location.href = 'final.html'; // Redirigir a la siguiente página
+                }, 2000); // Esperar 2 segundos antes de redirigir
+            } else {
+                resultadoDiv.textContent = "Opción incorrecta. Por favor, intenta de nuevo.";
+                iniciarReconocimientoVoz(); // Reiniciar el reconocimiento de voz
+            }
+        }
+
+        function iniciarReconocimientoVoz() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert('Lo siento, tu navegador no soporta el reconocimiento de voz.');
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = "es-ES"; // Configuramos el reconocimiento de voz en español
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript.toUpperCase();
+                if (speechResult.includes('A')) {
+                    seleccionarOpcion('A');
+                } else if (speechResult.includes('B')) {
+                    seleccionarOpcion('B');
+                } else if (speechResult.includes('C')) {
+                    seleccionarOpcion('C');
+                } else if (speechResult.includes('D')) {
+                    seleccionarOpcion('D');
+                } else {
+                    alert("Opción no reconocida. Por favor, intenta de nuevo.");
+                    iniciarReconocimientoVoz(); // Reiniciar el reconocimiento de voz si la opción no es reconocida
+                }
+            };
+
+            recognition.onspeechend = function() {
+                recognition.stop();
+            };
+
+            recognition.onerror = function(event) {
+                alert('Error en el reconocimiento de voz: ' + event.error);
+                iniciarReconocimientoVoz(); // Reiniciar el reconocimiento de voz en caso de error
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <style>
+        body {
+            background-color: #CCFF99; /* Color de fondo brillante */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente infantil */
+            margin: 0;
+            padding: 0;
+        }
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('gifFondo.gif') center center fixed;
+            background-size: cover;
+            z-index: 0;
+            opacity: 0.5; /* Ajusta este valor para cambiar la transparencia */
+        }
+        .container {
+            position: relative;
+            max-width: 750px; /* Aumentamos el ancho máximo del contenedor */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo claro con transparencia */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1;
+        }
+        h1 {
+            color: #FF8000; /* Color de texto */
+            font-size: 2.5em; /* Tamaño grande de texto */
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            background-color: #33FF33; /* Color de fondo de los botones */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+            color: white;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .grid-item:hover {
+            transform: scale(1.05);
+            background-color: #0288D1; /* Color de fondo al pasar el cursor */
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-overlay"></div>
+    <div class="container">
+        <h1>Menú Principal</h1>
+        <div class="grid">
+            <div class="grid-item" onclick="window.location.href='pagina1.html'">
+                <img src="gato.png" alt="Pregunta 1">
+                <p>Pregunta 1</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina2.html'">
+                <img src="elefante.png" alt="Pregunta 2">
+                <p>Pregunta 2</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina3.html'">
+                <img src="panda.png" alt="Pregunta 3">
+                <p>Pregunta 3</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina4.html'">
+                <img src="jirafa.png" alt="Pregunta 4">
+                <p>Pregunta 4</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina5.html'">
+                <img src="avestruz.png" alt="Pregunta 5">
+                <p>Pregunta 5</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina6.html'">
+                <img src="pirañas.png" alt="Pregunta 6">
+                <p>Pregunta 6</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina7.html'">
+                <img src="ovejas.png" alt="Pregunta 7">
+                <p>Pregunta 7</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina8.html'">
+                <img src="telaraña.png" alt="Pregunta 8">
+                <p>Pregunta 8</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='pagina9.html'">
+                <img src="perezosos.png" alt="Pregunta 9">
+                <p>Pregunta 9</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
