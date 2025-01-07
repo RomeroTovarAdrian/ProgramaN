@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondo con GIF y Color</title>
+    <style>
+        body {
+            background-color: #CCFF99; /* Color de fondo brillante */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente infantil */
+            margin: 0;
+            padding: 0;
+        }
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('gifFondo.gif') center center fixed;
+            background-size: auto;
+            z-index: 0;
+            opacity: 0.5; /* Ajusta este valor para cambiar la transparencia */
+        }
+        .container {
+			align-content: center;
+            position: relative;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo claro con transparencia */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1;
+        }
+        h1 {
+            color: #FF8000; /* Color de texto verde */
+            font-size: 2.5em; /* Tamaño grande de texto */
+        }
+        label {
+            color: #FF8000; /* Color de texto verde */
+            font-size: 1.5em; /* Tamaño grande de texto */
+            display: block;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #33FF33; /* Color de borde verde */
+            border-radius: 5px;
+            font-size: 1.2em; /* Tamaño de texto grande */
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            background-color: #33FF33; /* Color de botón verde */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5em; /* Tamaño de texto grande */
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0288D1; /* Color de botón al pasar el cursor */
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-overlay"></div>
+    <div class="container">
+        <h1>¡Bienvenido!</h1>
+        <form onsubmit="return verificarCredenciales()">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required maxlength="20">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required maxlength="20">
+            <div class="buttons">
+				<a href="PaginaRegistro.html">Click aqui para Registrarse</a><br>
+                <button type="submit">Entrar</button><br>
+                <button type="button" onclick="window.location.href='pagina-principal.html'">Regresar a la Página Principal</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function verificarCredenciales() {
+            const usuarioCorrecto = "Admin";
+            const contrasenaCorrecta = "Admin";
+            
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === usuarioCorrecto && password === contrasenaCorrecta) {
+                alert("Acceso concedido. ¡Bienvenido!");
+                return true; // Permite enviar el formulario
+            } else {
+                alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+                return false; // Previene el envío del formulario
+            }
+        }
+    </script>
+</body>
+</html>
